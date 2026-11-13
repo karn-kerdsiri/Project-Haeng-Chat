@@ -637,3 +637,25 @@
 - ปรับ DR-GRP-01, FR-GRP-02, FR-GRP-07, FR-GRP-10, NFR-GRP-03 และ AC-GRP-06 ให้ตรงกับคำตอบ Q1/Q6; เพิ่ม ASM-GRP-04 และ ASM-GRP-05
 - ย้ายคำถามที่ยังไม่ได้คำตอบไปเป็น Q-01 ถึง Q-06 พร้อมระบุผู้ที่ต้องตอบ และเพิ่ม Q-07 สำหรับช่องว่างการตามรอยข้อกำหนดกับ AC ที่พบระหว่างตรวจ
 - แก้การอ้างอิงคำถามใน OUT-GRP-05, DR-GRP-04 และ Traceability ให้ตรงกับรายการ Q ปัจจุบัน
+
+---
+
+## [2569-11-13 16:30 UTC] คำสั่ง: /plan specs/008-enter-group-members/spec.md
+
+- เครื่องมือ: Copilot SDK ใน VS Code
+- ไฟล์อ้างอิง: specs/008-enter-group-members/spec.md (Draft v2), AGENTS.md, .claude/commands/plan.md, docs/prompt-log-template.md
+- ผลลัพธ์: specs/008-enter-group-members/plan.md
+
+### คำถามที่ AI ถามและคำตอบของทีม
+
+- คำถาม: สำหรับ plan ของ spec 008 จะเลือก backend อย่างไร เมื่อ spec ระบุเพียง React และ PostgreSQL
+- คำตอบ: defer — เว้น backend framework ให้ทีมเลือกภายหลัง และไม่ระบุ FastAPI หรือ framework อื่นใน plan
+- Q-01 ถึง Q-07 ยังคงเป็น Open Questions ตาม spec; ไม่ได้ตอบแทนทีม
+
+### สรุปผล
+
+- ร่าง plan ครบ 8 หัวข้อ เชื่อมโยง FR/NFR/AC/Constraints และคง Q-01 ถึง Q-07 พร้อมระบุส่วนที่ยังไม่สร้าง
+- Constraint ที่ยังไม่ได้ใช้: ไม่มี; IF-AUTH-01, IF-WEB-01, IF-TECH-01 และ CON-GRP-01 ถึง CON-GRP-03 ถูกนำไปใช้ในแผน
+- AC-GRP-05 ต้องจำลองฐานข้อมูลไม่พร้อมใช้งาน; NFR-GRP-01, NFR-GRP-05 และ NFR-GRP-06 ยังไม่มี AC ตรวจโดยตรงตาม Q-07
+- สิ่งที่ AI อยากเดาแต่ไม่ได้เดา: backend framework, จำนวนสมาชิก/การนับผู้กรอก, รูปแบบคำขอร่วมกัน, การยืนยันสมาชิก, สิทธิ์แก้ไข/ถอน, retry policy และการยืนยันค่า 360 px
+- ไม่เขียนโค้ดและไม่แก้ไข spec.md
