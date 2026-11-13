@@ -105,4 +105,15 @@
 - สิ่งที่ AI อยากเดาแต่ไม่ได้เดา: ไม่กำหนดสูตรคำนวณ เกณฑ์การผ่าน รูปแบบผลลัพธ์ และวิธีเก็บประวัติแทนทีม โดยคง OQ-CAL-01 ถึง OQ-CAL-06 ไว้ตาม spec.md
 - หมายเหตุ: ดำเนินการจัดทำ Plan ในขณะที่ spec.md ยังเป็น Draft v1 ตามที่ผู้ใช้อนุญาตให้ดำเนินการต่อ
 
+
+## 2569-11-13 คำสั่ง: /plan
+
+- เครื่องมือ: ChatGPT ผ่าน GitHub Web UI
+- ไฟล์: specs/017-system-notification/spec.md
+- ผลลัพธ์: specs/017-system-notification/plan.md
+- ข้อสรุป: จัดทำแผนการพัฒนาตาม SPEC-NTF-017 ครอบคลุม Summary, Technology Choices, Data Model, API / Screen, Constraint Coverage, Test Plan, Implementation Steps และ Open Questions
+- Constraint ที่ยังไม่ได้ใช้: ไม่มี โดย Constraint ทั้ง 6 ข้อถูกนำไปอ้างอิงใน Constraint Coverage แล้ว
+- สิ่งที่ AI อยากเดาแต่ไม่ได้เดา: ไม่ตัดสินใจเรื่องอีเมล การตั้งค่าปิดแจ้งเตือน สถานะอ่านแล้ว เหตุการณ์เพิ่มเติม อายุและการลบการแจ้งเตือน หรือจำนวนแจ้งเตือนที่ยังไม่อ่าน โดยคง OQ-NTF-01 ถึง OQ-NTF-06 ไว้ตาม spec.md
+- หมายเหตุ: ดำเนินการจัดทำ Plan ในขณะที่ spec.md ยังเป็น Draft v1 ตามที่ผู้ใช้อนุญาตให้ดำเนินการต่อ
+
 ---
