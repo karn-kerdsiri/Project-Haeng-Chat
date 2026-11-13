@@ -709,3 +709,25 @@
 - ปรับ IN-APR-02, IN-APR-03, FR-APR-02 และ FR-APR-03 ให้ระบุการตรวจ/ตัดสินใจทีละคน; เพิ่ม ASM-APR-04 และ ASM-APR-05 ตามคำตอบทีม
 - ย้าย OQ-APR-01, OQ-APR-03, OQ-APR-04 และ OQ-APR-05 ที่ยังไม่ตอบเป็น Q-01 ถึง Q-04 พร้อมผู้ที่ต้องตอบ; เพิ่ม Q-05 ถึง Q-07 สำหรับ failure handling, การยืนยันค่าตัวเลข และช่องว่างการตามรอย AC
 - นำ OQ-APR-02 และ OQ-APR-06 ที่ตอบแล้วออกจาก Open Questions;
+
+---
+
+## [2569-11-13 16:52 UTC] คำสั่ง: /plan specs/009-advisor-approve-record/spec.md
+
+- เครื่องมือ: Copilot SDK ใน VS Code
+- ไฟล์อ้างอิง: specs/009-advisor-approve-record/spec.md (Draft v2), AGENTS.md, .claude/commands/plan.md, specs/008-enter-group-members/plan.md
+- ผลลัพธ์: specs/009-advisor-approve-record/plan.md
+
+### คำถามที่ AI ถามและคำตอบของทีม
+
+1. คำถามในแชตเรื่อง backend framework: สำหรับแผน 009 จะเว้นให้ทีมเลือกภายหลังตามแนวทาง plan 008 หรือเสนอ Python FastAPI เป็นค่าเริ่มต้นของรายวิชาโดยระบุว่าไม่ได้มาจาก spec?
+   - คำตอบ: defer — เว้น backend framework ให้ทีมเลือกภายหลัง; ไม่กำหนด FastAPI หรือ framework อื่นในแผน
+2. Q-01 ถึง Q-07 ใน spec: ยังไม่มีคำตอบเพิ่มเติมและคงไว้เป็น Open Questions
+
+### สิ่งที่สร้าง
+
+- ร่าง plan ครบ 8 หัวข้อ เชื่อมโยง FR/NFR/Constraints/AC กับโมเดลข้อมูล API/หน้าจอ ลำดับงาน และแผนทดสอบ
+- ตรวจ Constraints ครบ IF-AUTH-01, IF-WEB-01, IF-TECH-01, IF-AUDIT-01, CON-APR-01 และ CON-APR-02; ไม่มี Constraint ที่ไม่ถูกใช้
+- ระบุ test สำหรับ AC-APR-01 ถึง AC-APR-08; AC-APR-04 ต้องจำลองฐานข้อมูลล้มเหลว, AC-APR-05 ต้องเตรียมผู้ดูแล/ผู้ไม่ดูแล, AC-APR-06/07 ต้องเชื่อม UC-03/UC-11; NFR/HTTP 401 ที่ไม่มี AC โดยตรงคงรอ Q-07 และค่าเกณฑ์คงรอ Q-06
+- เว้น backend framework ตามคำตอบทีม; React/PostgreSQL อ้าง IF-TECH-01 และ Vite ระบุเป็นตัวเลือกทีมที่ไม่ได้มาจาก spec
+- ไม่เขียนโค้ดและไม่ตัดสินใจแทนทีมใน Q-01 ถึง Q-07
