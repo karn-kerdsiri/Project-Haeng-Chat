@@ -659,3 +659,21 @@
 - AC-GRP-05 ต้องจำลองฐานข้อมูลไม่พร้อมใช้งาน; NFR-GRP-01, NFR-GRP-05 และ NFR-GRP-06 ยังไม่มี AC ตรวจโดยตรงตาม Q-07
 - สิ่งที่ AI อยากเดาแต่ไม่ได้เดา: backend framework, จำนวนสมาชิก/การนับผู้กรอก, รูปแบบคำขอร่วมกัน, การยืนยันสมาชิก, สิทธิ์แก้ไข/ถอน, retry policy และการยืนยันค่า 360 px
 - ไม่เขียนโค้ดและไม่แก้ไข spec.md
+
+---
+
+## [2569-11-13 16:36 UTC] คำสั่ง: /tasks specs/008-enter-group-members/spec.md
+
+- เครื่องมือ: Copilot SDK ใน VS Code
+- ไฟล์อ้างอิง: specs/008-enter-group-members/spec.md (Draft v2), specs/008-enter-group-members/plan.md, README-tasks-pack.md
+- ผลลัพธ์: specs/008-enter-group-members/tasks.md
+
+### คำถามที่ AI ถามและคำตอบของทีม
+
+- ไม่มีคำถามเพิ่มเติม; Q-01 ถึง Q-07 ยังคงรอคำตอบตาม spec
+
+### สิ่งที่สร้าง
+
+- แตกงานพัฒนา 11 งานตามลำดับ โดยทุกงานอ้างอิง FR/AC/Constraint เดิม
+- เพิ่มตารางตรวจความครอบคลุม AC-GRP-01 ถึง AC-GRP-07 และ IF/CON ทั้งหมด
+- ทำเครื่องหมายงานที่ขึ้นกับ Open Questions ว่า “รอ Q-xx”; ไม่เขียนโค้ดและไม่เพิ่ม requirement หรือ ID ใหม่
