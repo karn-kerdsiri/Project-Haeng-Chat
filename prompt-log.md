@@ -484,3 +484,22 @@
 - เกณฑ์ AC เพิ่มเติมสำหรับ NFR-DOC-05/06 และผู้ให้บริการ Object Storage
 
 ---
+
+## [2569-11-13 20:39] คำสั่ง: /tasks
+
+- เครื่องมือ: Copilot SDK ใน VS Code
+- ไฟล์อ้างอิง: specs/002-submit-additional-grades/spec.md, specs/002-submit-additional-grades/plan.md
+- ผลลัพธ์: specs/002-submit-additional-grades/tasks.md
+
+### คำถามที่ AI ถามและคำตอบของทีม
+
+1. ต้องการ task breakdown ในรูปแบบใด?
+   - คำตอบ: Markdown โดยสร้างไฟล์ tasks.md และบันทึก prompt log
+
+### สิ่งที่สร้าง
+
+- แตกงานตาม 8 ขั้นใน plan.md ระบุการอ้างอิง FR/AC/Constraint เดิมและลำดับงาน
+- ระบุ Open Questions ที่ขวางพฤติกรรมบางส่วน โดยไม่สร้าง FR/AC ID ใหม่และไม่ตัดสินคำตอบแทนทีม
+- ไม่แก้ spec.md หรือเขียนโค้ด
+
+---
