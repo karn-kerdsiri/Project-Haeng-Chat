@@ -591,3 +591,20 @@
 - ใช้ React และ PostgreSQL ตาม IF-TECH-01; ระบุ Vite ว่าเป็นตัวเลือกทีมที่ไม่ได้มาจาก spec
 
 ---
+
+## [2569-11-13 16:09 UTC] คำสั่ง: /tasks specs/007-auto-precheck/spec.md
+
+- เครื่องมือ: Copilot SDK ใน VS Code
+- ไฟล์อ้างอิง: specs/007-auto-precheck/spec.md, specs/007-auto-precheck/plan.md, README-tasks-pack.md
+- ผลลัพธ์: specs/007-auto-precheck/tasks.md
+
+### คำถามที่ AI ถามและคำตอบของทีม
+
+- ไม่มีคำถามเพิ่มเติมในรอบนี้
+
+### สิ่งที่สร้าง
+
+- แตกงานตาม plan โดยอ้าง FR/AC/Constraint เดิม ครบ AC-PRE-01 ถึง AC-PRE-08 และระบุงานที่ต้องรอ Q-01 ถึง Q-06
+- ไม่เขียนโค้ดและไม่เพิ่มงานนอกขอบเขต spec
+
+---
