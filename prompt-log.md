@@ -572,3 +572,22 @@
 
 
 ---
+
+## [2569-11-13 15:58 UTC] คำสั่ง: /plan specs/007-auto-precheck/spec.md
+
+- เครื่องมือ: Copilot SDK ใน VS Code
+- ไฟล์อ้างอิง: specs/007-auto-precheck/spec.md, AGENTS.md, specs/001-Enter-educational-information/plan.md
+- ผลลัพธ์: specs/007-auto-precheck/plan.md
+
+### คำถามที่ AI ถามและคำตอบของทีม
+
+1. คำถาม: สำหรับ plan 007 ซึ่ง spec ไม่ได้ระบุ backend จะใส่ Python FastAPI ตามค่าเริ่มต้นของรายวิชา หรือเว้น backend ไว้ให้ทีมเลือกภายหลัง?
+2. คำตอบ: `defer` — เว้น backend ไว้ให้ทีมเลือกภายหลัง
+
+### สิ่งที่สร้าง
+
+- สร้างแผน 8 หัวข้อ อ้างอิง FR/AC/Constraint จาก SPEC-PRE-007; ครบ Constraint ทั้ง 7 รายการและ AC-PRE-01 ถึง AC-PRE-08
+- คง Q-01 ถึง Q-06 เป็นรายการรอคำตอบ; ไม่เลือก backend, ไม่กำหนดการเก็บผลเบื้องต้น, และไม่แก้โค้ด
+- ใช้ React และ PostgreSQL ตาม IF-TECH-01; ระบุ Vite ว่าเป็นตัวเลือกทีมที่ไม่ได้มาจาก spec
+
+---
