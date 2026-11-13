@@ -731,3 +731,22 @@
 - ระบุ test สำหรับ AC-APR-01 ถึง AC-APR-08; AC-APR-04 ต้องจำลองฐานข้อมูลล้มเหลว, AC-APR-05 ต้องเตรียมผู้ดูแล/ผู้ไม่ดูแล, AC-APR-06/07 ต้องเชื่อม UC-03/UC-11; NFR/HTTP 401 ที่ไม่มี AC โดยตรงคงรอ Q-07 และค่าเกณฑ์คงรอ Q-06
 - เว้น backend framework ตามคำตอบทีม; React/PostgreSQL อ้าง IF-TECH-01 และ Vite ระบุเป็นตัวเลือกทีมที่ไม่ได้มาจาก spec
 - ไม่เขียนโค้ดและไม่ตัดสินใจแทนทีมใน Q-01 ถึง Q-07
+
+---
+
+## [2569-11-13 16:59 UTC] คำสั่ง: /tasks specs/009-advisor-approve-record/spec.md
+
+- เครื่องมือ: Copilot SDK ใน VS Code
+- ไฟล์อ้างอิง: specs/009-advisor-approve-record/spec.md (Draft v2), specs/009-advisor-approve-record/plan.md, README-tasks-pack.md, AGENTS.md
+- ผลลัพธ์: specs/009-advisor-approve-record/tasks.md
+
+### คำถามที่ AI ถามและคำตอบของทีม
+
+- ไม่มีคำถามเพิ่มเติม; Q-01 ถึง Q-07 ยังคงเป็น Open Questions ตาม spec และไม่ได้ตอบแทนทีม
+
+### สิ่งที่สร้าง
+
+- แตกงานพัฒนา 9 งานตามลำดับ โดยทุกงานอ้างอิง FR/NFR/AC/Constraint/Q เดิมจาก spec
+- เพิ่มตารางตรวจความครอบคลุม AC-APR-01 ถึง AC-APR-08 และ IF/CON ทั้งหมด
+- ทำเครื่องหมายงานที่ขึ้นกับ Q-01 ถึง Q-07 ให้รอคำตอบ และระบุขอบเขตที่ทำได้ก่อนคำตอบมา
+- ไม่เขียนโค้ดและไม่เพิ่ม requirement หรือ ID ใหม่
