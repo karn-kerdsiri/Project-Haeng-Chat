@@ -108,7 +108,7 @@ Owner: ทีม B | Status: Draft v2 | Updated: 2569-11-14
   When เวลาผ่านไปตามเกณฑ์เวลาที่ทีมยืนยัน
   Then ผู้รับที่เกี่ยวข้องเห็นการแจ้งเตือนในระบบ
 
-- [ ] AC-NTF-09 (NFR-NTF-04, IF-AUTH-01)
+- [ ] AC-NTF-09 (NFR-NTF-04)
   Given ผู้ใช้เข้าสู่ระบบแล้วและไม่มีการใช้งานต่อเนื่อง
   When ไม่มีการใช้งานเกิน 30 นาที
   Then ระบบตัดการเชื่อมต่อบัญชีผู้ใช้โดยอัตโนมัติ
@@ -163,7 +163,7 @@ Owner: ทีม B | Status: Draft v2 | Updated: 2569-11-14
 | ข้อ 9 (NFR) | NFR-NTF-04 | AC-NTF-09 |
 | ข้อ 10 (NFR) | NFR-NTF-05 | AC-NTF-10 |
 | ข้อ 11 (NFR) | NFR-NTF-06 | AC-NTF-11 |
-| ข้อ 12 (CONSTRAINT) | IF-AUTH-01 | AC-NTF-04, AC-NTF-09 |
+| ข้อ 12 (CONSTRAINT) | IF-AUTH-01 | AC-NTF-04 |
 | ข้อ 13 (CONSTRAINT) | IF-WEB-01 | AC-NTF-10 |
 | ข้อ 19 (CONSTRAINT) | IF-TECH-01 | ต้องตรวจสอบความสอดคล้องกับเทคโนโลยีใน SPEC-001 ตาม ASM-NTF-02 |
 | ข้อ 20 (PROJECT) | ไม่อยู่ใน Spec นี้ เป็นงานระดับโปรเจกต์ | - |
