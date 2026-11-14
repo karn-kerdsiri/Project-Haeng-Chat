@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+# docs/srs
+
+วาง SRS ฉบับเต็ม (PDF หรือ Markdown) และ diagram ทุกภาพของทีมไว้ที่นี่
+AI จะเปิดอ่านเมื่อ spec.md ไม่ชัด แต่ spec.md ยังเป็นความจริงหนึ่งเดียวเสมอ
+=======
 # <โปรเจกต์แห่งชาติ>-swreqspec
 
 repo สำหรับงาน Spec-Driven Development ในรายวิชา 520461-165 Software Requirement Specification and Management
@@ -61,3 +67,4 @@ prompt-log.md                AI สร้างให้เมื่อใช้
 3.เจ้าหน้าที่ตรวจคุณสมบัติสามารถ "ตีกลับ/ปฏิเสธ" เพื่อให้นักศึกษาแก้ไขเฉพาะจุดได้หรือไม่ หรือต้องให้กรอกใหม่ทั้งหมด?
 
 
+>>>>>>> 5eeeb9c50cfb9c00cb68cb12ad447d537e1c382e
