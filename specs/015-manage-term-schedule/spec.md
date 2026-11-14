@@ -1,7 +1,7 @@
 # specs/015-manage-term-schedule/spec.md
 # Feature: จัดทำตารางเวลาประจำเทอม (Manage Term Schedule)
 Spec ID: SPEC-SCH-015 | Source: Use Case Specification UC-15 จัดทำตารางเวลาประจำเทอม + รายการความต้องการของทีม ข้อ 6 | Use case: UC-15
-Owner: ทีม B | Status: Draft v1 | Updated: 2569-10-21
+Owner: ทีม B | Status: Draft v2 | Updated: 2569-11-14
 
 ## Goal
 เจ้าหน้าที่กำหนดช่วงเวลาการดำเนินงานของแต่ละภาคการศึกษาได้
