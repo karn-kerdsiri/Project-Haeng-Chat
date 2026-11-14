@@ -570,3 +570,74 @@
 - ยังไม่กำหนดชื่อตารางหรือ foreign key จริง เพราะไม่มี codebase และการจับคู่ entity คำร้องกับ AcademicRecord ยังรอยืนยันตาม ASM-ADD-03
 
 ---
+
+## [2569-11-13 22:40] คำสั่ง: /implement T-01 specs/002-submit-additional-grades/tasks.md
+
+- เครื่องมือ: Copilot SDK ใน VS Code
+- ผลลัพธ์: ตรวจสถานะ T-01 และสรุปงานที่ยังติด blockers
+
+### สิ่งที่ตรวจพบและแก้ไข
+
+- มี frontend starter (`src/pages/`, `src/api/`) และไฟล์ dependency/config ของ backend แต่ยังไม่มี backend app, ORM models หรือ migrations
+- ปรับ plan.md และ tasks.md ให้สะท้อนสถานะโครงสร้างล่าสุด; ยังไม่สร้างโค้ดหรือ schema
+- T-01 ยังรอการยืนยัน entity คำร้องเดิมตาม ASM-ADD-03 และการมี model/migration สำหรับเชื่อมจริง
+
+---
+
+## [2569-11-13 22:40] คำตอบเพิ่มเติม: Parent entity และ backend path ของ T-01
+
+- คำถามก่อนหน้า: ให้ใช้ AcademicRecord จาก specs/001 เป็น parent หรือไม่ และใช้ path ใดสำหรับ backend?
+- คำตอบของทีม: ใช้ AcademicRecord และ `backend/app/`
+- สิ่งที่แก้: ปรับ ASM-ADD-03 ใน spec.md ให้บันทึกคำยืนยันเดิม; อัปเดต logical model, mapping และสถานะ T-01 ใน plan.md/tasks.md
+- ยังไม่สร้างโค้ดหรือ migrations เพราะ scaffold ยังไม่มี ORM models ของ AcademicRecord, master course และ term schedule ให้เชื่อมโดยไม่สร้างข้อมูลซ้ำ
+
+---
+
+## [2569-11-13 22:52] เริ่ม domain validation แยกสำหรับฟีเจอร์ 002
+
+- คำสั่งจากทีม: เริ่มทำงานที่ทำต่อได้โดยไม่ไปยุ่งกับงาน 001, 012 และ 015
+- สิ่งที่สร้างใน `backend/app/submit_additional_grades/validation.py`: ตรวจฟิลด์บังคับ (DR-ADD-01), เกรด (DR-ADD-02), รหัสวิชาจากรายการต้นทางที่ส่งเข้ามา (DR-ADD-04), รายวิชาซ้ำใน AcademicRecord เดียวกัน (DR-ADD-05) และการเปลี่ยนเกรด (DR-ADD-06)
+- เพิ่ม unit tests ที่อ้างอิง DR/AC เดิมใน `backend/tests/submit_additional_grades/test_validation.py`
+- ตรวจ `git diff --check` ผ่าน; ยังรัน pytest ไม่ได้เพราะเครื่องไม่มี Python interpreter (มีเพียง Windows Store execution alias)
+- ยังไม่สร้าง API, UI, ORM model หรือ migration; การเชื่อมระบบจริงยังรอ source models ของ AcademicRecord, master course และ term schedule
+
+---
+
+## [2569-11-13 23:00] ลบตัวอย่าง frontend จากระบบอื่น
+
+- คำสั่งจากทีม: ลบส่วน frontend ที่เป็นโค้ดตัวอย่างของระบบอื่น
+- ลบข้อความหน้าจอตรวจสอบสิทธิ์/จองคิว ชื่อหน้าและแพ็กเกจ `booking-frontend`, รวมถึง API ตัวอย่าง `/slots` และ `/bookings`
+- คงโครง React/Vite, Tailwind, การตั้งค่า proxy และ test environment ซึ่งเป็นโครงสร้างทั่วไป
+- แทนที่ smoke test ให้ตรวจเฉพาะการ render application shell
+- ตรวจค้นคำและ endpoint ของระบบตัวอย่างแล้วไม่พบ; `npm test`, `npm run build` และ `git diff --check` ผ่าน
+- `npm ci` รายงานช่องโหว่จาก dependencies ที่ล็อกไว้ 5 รายการ; ไม่ได้อัปเดตหรือแก้ dependency เพราะอยู่นอกขอบเขตคำสั่งนี้
+
+---
+
+## [2569-11-14] เริ่มจัดทำรายงาน Requirement ตามเกณฑ์ประเมิน 45 คะแนน
+
+- คำสั่งจากทีม: จัดทำเอกสารรายงานตามเกณฑ์ประเมิน Term Project พร้อมส่งข้อมูล stakeholder ที่เก็บมาจริง (บุคลากร, นักศึกษา, อาจารย์ที่ปรึกษา) และภาพ Onion Model / Stakeholder Map
+- สิ่งที่ตรวจพบ: รายงาน `.docx` ฉบับเดิมใช้ UC-01..UC-10, FR-01..FR-18, NFR-01..NFR-10, AC-01..AC-10 ซึ่ง **ไม่ตรง** กับ `specs/` ใน repository ที่มี 17 use case และใช้ ID รายฟีเจอร์ (เช่น FR-ADD-01, NFR-OWN-02)
+- สิ่งที่สร้าง: `docs/srs/report-requirement.md` หัวข้อ 1-4 จากข้อมูลที่เก็บมาจริง ได้แก่ Stakeholder (STK-01..04), กระบวนการปัจจุบัน (ASIS-01..03), ปัญหา (PRB-01..09) และความต้องการ (NEED-01..08) พร้อม map ไปยัง Spec ID เดิมทุกข้อ
+- ID ที่ใช้: อ้าง ID เดิมจาก `specs/` เท่านั้น ส่วน STK/PRB/NEED/ASIS ระบุไว้ชัดว่าเป็นรหัสอ้างอิงภายในรายงาน ไม่ใช่ข้อกำหนดของระบบ
+- สิ่งที่ AI ไม่ได้เดา และยกเป็นคำถาม OQ-R-01 ถึง OQ-R-05:
+  - ขอบเขตการ "อนุมัติภายในเว็บ" ของอาจารย์ เทียบกับ ASM-OWN-05 ใน specs/003
+  - PRB-05, PRB-06 ถูกเก็บในกลุ่มนักศึกษา แต่เป็นงานที่บุคลากรดูแล
+  - NEED-05 "แนบเอกสารทั้งหมดพร้อมกัน" หมายถึงเอกสารใดบ้าง
+  - ยังไม่มีข้อมูลที่เก็บจากคณะ (STK-04) โดยตรง
+  - ยังไม่มีบันทึกวิธีเก็บข้อมูล วันที่ และจำนวนผู้ให้ข้อมูล ซึ่งเกณฑ์ข้อ 1 ต้องการเป็นหลักฐาน
+- ยังไม่ได้เขียนหัวข้อ 5-10 (SRS, AC, Traceability, Prototype) และยังไม่ได้แปลงเป็น .docx รอทีมยืนยันรูปแบบไฟล์ที่จะส่ง
+
+---
+
+## [2569-11-14] เขียนรายงาน Requirement หัวข้อ 5-11 และสร้างภาคผนวกข้อกำหนด
+
+- คำสั่งจากทีม: ให้ทำรายงานเป็น Markdown ก่อน
+- สร้าง `docs/srs/appendix-requirements.md` ด้วยสคริปต์ที่อ่าน `specs/*/spec.md` โดยตรง คัดลอก FR 173 ข้อ NFR 100 ข้อ และ AC 141 ข้อ พร้อม ID และที่มาเดิมทั้งหมด ไม่พิมพ์ซ้ำด้วยมือเพื่อกันข้อความสองชุดไม่ตรงกัน
+- เขียน `docs/srs/report-requirement.md` หัวข้อ 5 ถึง 11: SRS, Acceptance Criteria, สายการตามรอย SRS ไป spec ไป plan ไป tasks ไป test, Prototype, Traceability Matrix และหลักฐานผลของ spec ที่หละหลวม
+- รันเทสต์จริงเพื่อเป็นหลักฐาน: ติดตั้ง pytest แล้ว `python -m pytest -q` ที่ backend ได้ 9 passed และ `npm test` ที่ frontend ได้ 1 passed บันทึกผลลงรายงานหัวข้อ 9.1
+- หลักฐานหัวข้อ 10 ใช้กรณีจริงจากประวัติ repo 3 กรณี: FR-ADD-03 ขัดกับ DR-ADD-04 (commit 185f6c1), DR-ADD-02 ไม่ระบุชุดค่าเกรดจึงเขียน test ไม่ได้ และ scaffold ที่มีโค้ดระบบจองคิวติดมาโดยไม่มี FR รองรับ
+- ข้อที่ยังไม่แก้และบันทึกไว้ในรายงาน: `specs/README.md` ยังเป็นตารางตัวอย่าง 001-booking ของผู้สอน, NFR 7 ข้อยังไม่มีหมวด และความขัดแย้ง Supabase กับ PostgreSQL ตาม ASM-ADD-02 — ทั้งสามข้อไม่ได้แก้เอง เพราะต้องให้ทีมตัดสิน
+- ยังไม่ได้แปลงเป็น .docx และยังไม่ได้ commit
+
+---
