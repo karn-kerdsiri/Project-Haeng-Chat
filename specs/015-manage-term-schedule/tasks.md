@@ -14,7 +14,7 @@
 | 6 | สร้าง background scheduler/worker สำหรับเปิด/ปิดแบบฟอร์มอัตโนมัติและตรวจคงความสอดคล้องกับช่วงเวลา ตาม FR-SCH-06, FR-SCH-07, IF-FORM-01, NFR-SCH-03, AC-SCH-04, AC-SCH-05 | FR-SCH-06, FR-SCH-07, IF-FORM-01, NFR-SCH-03, AC-SCH-04, AC-SCH-05 | 2, 5 | รอเริ่ม |
 | 7 | สร้างหน้าเลือกภาคการศึกษาและหน้าเพิ่ม/แก้ไขตารางเวลา เพื่อให้เจ้าหน้าที่กำหนดกิจกรรมและช่วงเวลาได้ตาม FR-SCH-01 และ FR-SCH-02 | FR-SCH-01, FR-SCH-02, DR-SCH-01, DR-SCH-03, AC-SCH-01 | 2, 3 | ทำแล้ว |
 | 8 | สร้างโครงสร้างให้ “ตารางเวลาที่เผยแพร่” เป็นชุดเดียวกับที่ UC-05 ใช้ และยืนยันความสอดคล้องตาม FR-SCH-11, AC-SCH-08 | FR-SCH-11, AC-SCH-08 | 4, 6 | ทำแล้ว |
-| 9 | สร้างประวัติการเปลี่ยนแปลงตารางเวลาและหน้าตรวจดูประวัติ ตาม IF-AUDIT-01, DR-SCH-04, NFR-SCH-06, AC-SCH-09 | IF-AUDIT-01, DR-SCH-04, NFR-SCH-06, AC-SCH-09 | 4 | รอเริ่ม |
+| 9 | สร้างประวัติการเปลี่ยนแปลงตารางเวลาและหน้าตรวจดูประวัติ ตาม IF-AUDIT-01, DR-SCH-04, NFR-SCH-06, AC-SCH-09 | IF-AUDIT-01, DR-SCH-04, NFR-SCH-06, AC-SCH-09 | 4 | ทำแล้ว |
 | 10 | ทดสอบ end-to-end ครบทุก AC-SCH-01 ถึง AC-SCH-09 และตรวจความครอบคลุม constraints ในสภาพแวดล้อมที่มี session และการควบคุมฟอร์มจริง | AC-SCH-01, AC-SCH-02, AC-SCH-03, AC-SCH-04, AC-SCH-05, AC-SCH-06, AC-SCH-07, AC-SCH-08, AC-SCH-09, IF-AUTH-01, IF-WEB-01, IF-TECH-01, IF-AUDIT-01, IF-FORM-01, CON-SCH-01, CON-SCH-02 | 1 ถึง 9 | รอเริ่ม |
 
 ## งานที่ยังรอคำตอบจาก Open Questions
