@@ -25,7 +25,11 @@ def _is_missing(value: object) -> bool:
 
 
 def _course_term_key(entry: Mapping[str, object]) -> tuple:
-    return entry["course_code"], entry["academic_year"], entry["semester"]
+    return entry.get("course_code"), entry.get("academic_year"), entry.get("semester")
+
+
+def _has_course_term_key(entry: Mapping[str, object]) -> bool:
+    return all(value is not None and (not isinstance(value, str) or value.strip()) for value in _course_term_key(entry))
 
 
 def validate_grade_entry(
@@ -65,7 +69,9 @@ def validate_grade_entry(
     ):
         candidate_key = _course_term_key(entry)
         has_duplicate = any(
-            _course_term_key(existing) == candidate_key
+            isinstance(existing, Mapping)
+            and _has_course_term_key(existing)
+            and _course_term_key(existing) == candidate_key
             for existing in existing_entries_for_same_academic_record
         )
         if has_duplicate:
@@ -81,4 +87,8 @@ def validate_grade_entry(
 
 
 def grade_changed(previous_grade: object, new_grade: object) -> bool:
-    return previous_grade != new_grade
+    if previous_grade is None and new_grade is None:
+        return False
+    if previous_grade is None or new_grade is None:
+        return True
+    return str(previous_grade).strip() != str(new_grade).strip()

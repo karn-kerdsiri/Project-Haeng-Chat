@@ -98,6 +98,17 @@ def test_DR_ADD_05_allows_a_different_course_term_key(change):
     assert issues == []
 
 
+def test_DR_ADD_05_ignores_incomplete_existing_entries_when_checking_duplicates():
+    issues = validate_grade_entry(
+        _entry(),
+        {"CS101"},
+        existing_entries_for_same_academic_record=[{"course_code": "CS101"}],
+    )
+
+    assert issues == []
+
+
 def test_DR_ADD_06_detects_only_actual_grade_changes():
     assert grade_changed("I", "B") is True
     assert grade_changed("B", "B") is False
+    assert grade_changed(" B ", "B") is False
