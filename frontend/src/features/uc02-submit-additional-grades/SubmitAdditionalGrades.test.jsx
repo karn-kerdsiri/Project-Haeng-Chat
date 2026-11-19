@@ -52,3 +52,35 @@ test('AC_ADD_02_FR_ADD_02_blocks_the_form_when_there_is_no_base_record', () => {
   // หน้าเริ่มต้นมีข้อมูลเดิม จึงเปิดฟอร์มได้ตามปกติ
   expect(screen.getByText(/เพิ่มรายวิชาที่ประกาศเกรดเพิ่มเติม/)).toBeTruthy()
 })
+
+// ---------- test ที่เขียนจาก test-cases.md แถวสถานะ "ใช้ได้" (2569-11-19) ----------
+
+test('TC_ADD_01_2_shows_latest_status_and_the_new_row_after_saving', () => {
+  // Given คำร้องเดิมมีระเบียน 3 รายการ อยู่ในช่วงเปิดรับ และเพิ่งบันทึกรายวิชาใหม่สำเร็จ
+  render(<SubmitAdditionalGrades />)
+  fireEvent.change(screen.getByLabelText(/^รายวิชา/), { target: { value: '517xxx4' } })
+  fireEvent.change(screen.getByLabelText(/^ปีการศึกษา/), { target: { value: '2569' } })
+  fireEvent.change(screen.getByLabelText(/^ภาคเรียน/), { target: { value: '1' } })
+  fireEvent.change(screen.getByLabelText(/^เกรด/), { target: { value: 'A' } })
+  // When นักศึกษาเปิดหน้าส่งผลการเรียนเพิ่มเติม (หลังบันทึก)
+  fireEvent.click(screen.getByText('เพิ่มรายวิชา'))
+  // Then 1) หน้าจอแสดงสถานะคำร้องล่าสุดเป็น "รอตรวจสอบ" ตาม FR-ADD-10
+  expect(screen.getByText(/สถานะคำร้องปัจจุบัน/).textContent).toContain('รอตรวจสอบ')
+  // Then 2) รายการที่เพิ่งเพิ่มปรากฏในรายการผลการเรียนของคำร้อง ตาม FR-ADD-01
+  expect(screen.getByText(/เครือข่ายคอมพิวเตอร์ · 2569\/1/)).toBeTruthy()
+})
+
+test('TC_ADD_03_1_confirmation_screen_names_course_old_and_new_grade', () => {
+  // Given คำร้องมีรายวิชา A ปีการศึกษา 2568 ภาคเรียน 1 เกรด I อยู่แล้ว
+  render(<SubmitAdditionalGrades />)
+  // When แก้เกรดของรายวิชานั้นเป็น B แล้วกดส่ง
+  fireEvent.change(screen.getByLabelText('แก้เกรดของ ระบบฐานข้อมูล'), { target: { value: 'B' } })
+  fireEvent.click(screen.getAllByText('แก้เกรด')[1])
+  // Then 1) ระบบแสดงหน้าจอยืนยันที่ระบุชื่อรายวิชา
+  const box = screen.getByText(/ยืนยันการแก้เกรด/).parentElement
+  expect(box.textContent).toContain('ระบบฐานข้อมูล')
+  // Then 2) ระบุเกรดเดิมเป็น I  3) ระบุเกรดใหม่เป็น B ตาม FR-ADD-05
+  expect(box.textContent).toContain('จากเกรด')
+  expect(box.textContent).toMatch(/I/)
+  expect(box.textContent).toMatch(/B/)
+})
