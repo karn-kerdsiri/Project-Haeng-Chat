@@ -11,7 +11,7 @@ import { useState } from 'react'
 import {
   ALLOWED_GRADES, SEMESTERS, FILE_RULES,
   CURRICULUM_COURSES, PREPARATION_COURSE, NOT_PASSED_GRADES,
-} from '../mock/data.js'
+} from './mock.js'
 
 // ส่วนหัวของแบบฟอร์มจริง
 const HEADER_FIELDS = [

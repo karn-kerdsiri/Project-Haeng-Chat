@@ -4,7 +4,7 @@
 //                     (ตรวจสิทธิ์และส่งไฟล์จริง เป็นงานฝั่งหลังบ้าน)
 // OUT-DOC-01 การอัปโหลดและแก้ไขเอกสารโดยเจ้าหน้าที่อยู่นอกขอบเขต จึงไม่มีปุ่มจัดการเอกสารในหน้านี้
 import { useState } from 'react'
-import { MOCK_DOCUMENTS } from '../mock/data.js'
+import { MOCK_DOCUMENTS } from './mock.js'
 
 export default function DownloadDocuments() {
   const [hasDocuments, setHasDocuments] = useState(true)

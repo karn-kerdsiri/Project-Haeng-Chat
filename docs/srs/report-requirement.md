@@ -516,16 +516,29 @@ specs/NNN-<feature>/tasks.md    = ตารางงาน คอลัมน์
 |---|---|---|---|
 | Domain validation ของ UC-02 | `backend/app/submit_additional_grades/validation.py` | DR-ADD-01, DR-ADD-02, DR-ADD-04, DR-ADD-05, DR-ADD-06 | ใช้งานได้ ทดสอบผ่าน |
 | Unit tests ของ UC-02 | `backend/tests/submit_additional_grades/test_validation.py` | AC-ADD-04 และ DR ข้างต้น | 9 เทสต์ ผ่านทั้งหมด |
-| หน้าจอ UC-01 กรอกผลการศึกษา | `frontend/src/pages/AcademicRecordEntry.jsx` | FR-EDU-01 ถึง FR-EDU-07, FR-EDU-13, DR-EDU-01, DR-EDU-02, DR-EDU-04 ถึง DR-EDU-11 | mock UI ใช้งานได้ ทดสอบผ่าน |
-| หน้าจอ UC-02 ส่งผลเพิ่มเติม | `frontend/src/pages/SubmitAdditionalGrades.jsx` | FR-ADD-01 ถึง FR-ADD-06, FR-ADD-10, DR-ADD-01 ถึง DR-ADD-06 | mock UI ใช้งานได้ ทดสอบผ่าน |
-| หน้าจอ UC-03 ดูผลของตนเอง | `frontend/src/pages/OwnEligibilityResult.jsx` | FR-OWN-02 ถึง FR-OWN-07, DR-OWN-01 ถึง DR-OWN-06 | mock UI ใช้งานได้ ทดสอบผ่าน |
-| หน้าจอ UC-04 ดาวน์โหลดเอกสาร | `frontend/src/pages/DownloadDocuments.jsx` | FR-DOC-01, FR-DOC-02, FR-DOC-05, FR-DOC-07, DR-DOC-01, DR-DOC-02 | mock UI ใช้งานได้ ทดสอบผ่าน |
-| Unit tests ของหน้าจอ | `frontend/src/__tests__/pages.test.jsx` | AC และ DR ของทั้ง 4 ฟีเจอร์ | 26 เทสต์ ผ่านทั้งหมด |
+| หน้าจอ UC-01 กรอกผลการศึกษา | `frontend/src/features/uc01-academic-record-entry/` | FR-EDU-01 ถึง FR-EDU-07, FR-EDU-13, DR-EDU-01, DR-EDU-02, DR-EDU-04 ถึง DR-EDU-11 | mock UI ใช้งานได้ ทดสอบผ่าน |
+| หน้าจอ UC-02 ส่งผลเพิ่มเติม | `frontend/src/features/uc02-submit-additional-grades/` | FR-ADD-01 ถึง FR-ADD-06, FR-ADD-10, DR-ADD-01 ถึง DR-ADD-06 | mock UI ใช้งานได้ ทดสอบผ่าน |
+| หน้าจอ UC-03 ดูผลของตนเอง | `frontend/src/features/uc03-view-own-result/` | FR-OWN-02 ถึง FR-OWN-07, DR-OWN-01 ถึง DR-OWN-06 | mock UI ใช้งานได้ ทดสอบผ่าน |
+| หน้าจอ UC-04 ดาวน์โหลดเอกสาร | `frontend/src/features/uc04-download-documents/` | FR-DOC-01, FR-DOC-02, FR-DOC-05, FR-DOC-07, DR-DOC-01, DR-DOC-02 | mock UI ใช้งานได้ ทดสอบผ่าน |
+| Unit tests ของหน้าจอ | ไฟล์ `*.test.jsx` ในโฟลเดอร์ของแต่ละฟีเจอร์ | AC และ DR ของฟีเจอร์นั้น ๆ | UC-01 9, UC-02 8, UC-03 5, UC-04 3 เทสต์ ผ่านทั้งหมด |
 
-### 8.2 ขอบเขตของต้นแบบ
+### 8.2 ขอบเขตและการแยกของต้นแบบ
 
 หน้าจอทั้ง 4 เป็น **mock UI** คือใช้ข้อมูลจำลองในไฟล์ ไม่เรียก API และไม่มีการยืนยันตัวตนจริง
 กฎการตรวจข้อมูลฝั่งหน้าจออ้างอิง DR เดิมจาก `spec.md` ทุกข้อ และเขียนคอมเมนต์กำกับว่ารองรับ FR หรือ AC ข้อใด
+
+**แต่ละ use case แยกโฟลเดอร์ของตัวเองอย่างสมบูรณ์** ที่ `frontend/src/features/<uc>/` โดย 1 โฟลเดอร์มีครบทั้งหน้าจอ ข้อมูลจำลอง และ test ของฟีเจอร์นั้น
+
+| โฟลเดอร์ | ไฟล์ภายใน |
+|---|---|
+| `uc01-academic-record-entry/` | `AcademicRecordEntry.jsx`, `mock.js`, `AcademicRecordEntry.test.jsx` |
+| `uc02-submit-additional-grades/` | `SubmitAdditionalGrades.jsx`, `mock.js`, `SubmitAdditionalGrades.test.jsx` |
+| `uc03-view-own-result/` | `OwnEligibilityResult.jsx`, `mock.js`, `OwnEligibilityResult.test.jsx` |
+| `uc04-download-documents/` | `DownloadDocuments.jsx`, `mock.js`, `DownloadDocuments.test.jsx` |
+
+เหตุผลคือ `tasks.md` ของแต่ละฟีเจอร์แยกกันอยู่แล้ว และในงานจริงจะพัฒนาและส่งมอบทีละ use case
+การแยกนี้ทำให้ลบหรือส่งมอบฟีเจอร์ใดก็ทำได้โดยลบทั้งโฟลเดอร์ และไม่มีไฟล์ใดใน `features/` import ข้ามฟีเจอร์กัน (ตรวจด้วย grep แล้ว)
+ส่วน `App.jsx` เป็นเพียงสารบัญสำหรับเปิดดูต้นแบบ ไม่มีตรรกะของ use case ใด
 
 ### 8.3 สิ่งที่ยังไม่มี
 

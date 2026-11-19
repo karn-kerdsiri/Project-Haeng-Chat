@@ -5,7 +5,7 @@
 import { useState } from 'react'
 import {
   ALLOWED_GRADES, SEMESTERS, MOCK_COURSES, MOCK_EXISTING_ENTRIES, REQUEST_STATUS,
-} from '../mock/data.js'
+} from './mock.js'
 
 const EMPTY = { courseCode: '', academicYear: '', semester: '', grade: '' }
 

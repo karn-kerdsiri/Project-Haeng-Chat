@@ -3,7 +3,7 @@
 //          DR-OWN-01 ถึง DR-OWN-06
 // ไม่รองรับในหน้านี้: FR-OWN-01 และ FR-OWN-08 (ตรวจ session และสิทธิ์ เป็นงานฝั่งหลังบ้าน)
 import { useState } from 'react'
-import { MOCK_OWN_REQUEST, REQUEST_STATUS, ELIGIBILITY_RESULT } from '../mock/data.js'
+import { MOCK_OWN_REQUEST, REQUEST_STATUS, ELIGIBILITY_RESULT } from './mock.js'
 
 // สถานการณ์จำลองสำหรับดูหน้าจอแต่ละกรณีที่ spec ระบุ
 const SCENARIOS = {

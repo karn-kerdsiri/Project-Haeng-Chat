@@ -1,18 +1,22 @@
-// โครงหน้าจอรวมของ mock UI
-// แต่ละหน้าอ้างอิง use case และ spec ของตนเองไว้ในไฟล์หน้านั้น
-// IF-WEB-01 ทุกหน้าทำงานบนเบราว์เซอร์โดยไม่ต้องติดตั้งโปรแกรมเพิ่ม
-// NFR-*-04 รองรับจอกว้างตั้งแต่ 360 px โดยไม่มีการเลื่อนแนวนอน
+// โครงรวมสำหรับเปิดดูต้นแบบเท่านั้น ไม่ใช่ที่อยู่ของตรรกะ use case ใด
+//
+// แต่ละ use case อยู่ในโฟลเดอร์ของตัวเองที่ src/features/<uc>/ ประกอบด้วยหน้าจอ
+// ข้อมูลจำลอง และ test ของตัวเอง ไม่ import ข้ามฟีเจอร์ เพื่อให้พัฒนา ทดสอบ
+// และส่งมอบทีละ use case ได้ ตามที่ tasks.md ของแต่ละฟีเจอร์แยกกันอยู่แล้ว
+//
+// ไฟล์นี้ทำหน้าที่เดียวคือเป็นสารบัญให้เปิดดูต้นแบบ ถ้าลบฟีเจอร์ใดออก
+// ให้ลบทั้งโฟลเดอร์และลบ 1 บรรทัดในตาราง PAGES ด้านล่าง
 import { useState } from 'react'
-import AcademicRecordEntry from './pages/AcademicRecordEntry.jsx'
-import SubmitAdditionalGrades from './pages/SubmitAdditionalGrades.jsx'
-import OwnEligibilityResult from './pages/OwnEligibilityResult.jsx'
-import DownloadDocuments from './pages/DownloadDocuments.jsx'
+import AcademicRecordEntry from './features/uc01-academic-record-entry/AcademicRecordEntry.jsx'
+import SubmitAdditionalGrades from './features/uc02-submit-additional-grades/SubmitAdditionalGrades.jsx'
+import OwnEligibilityResult from './features/uc03-view-own-result/OwnEligibilityResult.jsx'
+import DownloadDocuments from './features/uc04-download-documents/DownloadDocuments.jsx'
 
 const PAGES = [
-  { id: 'uc01', label: 'UC-01 กรอกผลการศึกษา', spec: 'SPEC-EDU-001', Component: AcademicRecordEntry },
-  { id: 'uc02', label: 'UC-02 ส่งผลเพิ่มเติม', spec: 'SPEC-ADD-002', Component: SubmitAdditionalGrades },
-  { id: 'uc03', label: 'UC-03 ดูผลของตนเอง', spec: 'SPEC-OWN-003', Component: OwnEligibilityResult },
-  { id: 'uc04', label: 'UC-04 ดาวน์โหลดเอกสาร', spec: 'SPEC-DOC-004', Component: DownloadDocuments },
+  { id: 'uc01', label: 'UC-01 กรอกผลการศึกษา', spec: 'SPEC-EDU-001', folder: 'uc01-academic-record-entry', Component: AcademicRecordEntry },
+  { id: 'uc02', label: 'UC-02 ส่งผลเพิ่มเติม', spec: 'SPEC-ADD-002', folder: 'uc02-submit-additional-grades', Component: SubmitAdditionalGrades },
+  { id: 'uc03', label: 'UC-03 ดูผลของตนเอง', spec: 'SPEC-OWN-003', folder: 'uc03-view-own-result', Component: OwnEligibilityResult },
+  { id: 'uc04', label: 'UC-04 ดาวน์โหลดเอกสาร', spec: 'SPEC-DOC-004', folder: 'uc04-download-documents', Component: DownloadDocuments },
 ]
 
 export default function App() {
@@ -26,6 +30,7 @@ export default function App() {
         <h1 className="text-2xl font-bold">ระบบตรวจสอบคุณสมบัตินักศึกษา</h1>
         <p className="text-sm text-gray-600">
           ต้นแบบหน้าจอ (mock UI) ยังไม่เชื่อมต่อฐานข้อมูลและยังไม่มีการยืนยันตัวตนจริง
+          แต่ละ use case แยกโฟลเดอร์กัน
         </p>
       </header>
 
@@ -45,7 +50,9 @@ export default function App() {
         ))}
       </nav>
 
-      <p className="text-sm text-gray-500">อ้างอิง: {page.spec}</p>
+      <p className="text-sm text-gray-500">
+        อ้างอิง: {page.spec} · โค้ดอยู่ที่ <code>src/features/{page.folder}/</code>
+      </p>
 
       <Current />
     </main>
