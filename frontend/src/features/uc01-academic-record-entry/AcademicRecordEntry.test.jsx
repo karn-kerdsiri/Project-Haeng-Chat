@@ -1,7 +1,8 @@
 // ทดสอบหน้าจอของ UC-01 เท่านั้น
 // อยู่ในโฟลเดอร์ของฟีเจอร์ เพื่อให้ย้ายหรือส่งมอบ use case นี้แยกจากฟีเจอร์อื่นได้
 import { render, screen, fireEvent } from '@testing-library/react'
-import AcademicRecordEntry, { validateHeader, validateFiles, summarize } from './AcademicRecordEntry.jsx'
+import AcademicRecordEntry, { PrecheckMockPanel, validateHeader, validateFiles, summarize } from './AcademicRecordEntry.jsx'
+import { PRECHECK_MOCK_FIXTURES } from './mock.js'
 
 const VALID_HEADER = {
   term: '1', year: '2568', fullName: 'สมชาย ใจดี', studentId: '650710000', gpax: '3.25',
@@ -62,4 +63,25 @@ test('FR_EDU_02_shows_a_read_only_notice_when_the_round_is_closed', () => {
   render(<AcademicRecordEntry />)
   fireEvent.click(screen.getByLabelText(/จำลองกรณีอยู่นอกช่วงที่เปิดรับข้อมูล/))
   expect(screen.getAllByRole('alert').some((e) => e.textContent.includes('นอกช่วงที่เปิดรับข้อมูล'))).toBe(true)
+})
+
+test('test_AC_PRE_01_renders_mock_preliminary_summary_and_condition_details', () => {
+  render(<PrecheckMockPanel fixture={PRECHECK_MOCK_FIXTURES.failed} />)
+
+  expect(screen.getByText('ผลเบื้องต้น — ตัวอย่างจำลอง ไม่ใช่ผลทางการ')).toBeTruthy()
+  expect(screen.getByText('ชุดตัวอย่างกรณีไม่ผ่าน')).toBeTruthy()
+  expect(screen.getByText(PRECHECK_MOCK_FIXTURES.failed.summary)).toBeTruthy()
+  expect(screen.getByText('ข้อมูลตัวอย่างรายวิชา')).toBeTruthy()
+  expect(screen.getByText(/ข้อมูลที่ใช้เปรียบเทียบ: ปีการศึกษา 2568 \/ 517 122/)).toBeTruthy()
+  expect(screen.getByText(/ข้อมูลในชุดนี้ถูกกำหนดเพื่อแสดงกรณีตัวอย่างที่ไม่ผ่านเท่านั้น/)).toBeTruthy()
+  expect(screen.getByText(/ตัวอย่างทั้งสองกรณีไม่เกี่ยวข้องกับยอดรวมผลการเรียน/)).toBeTruthy()
+})
+
+test('test_AC_PRE_01_renders_mock_pass_fixture_without_calculation', () => {
+  render(<PrecheckMockPanel fixture={PRECHECK_MOCK_FIXTURES.passed} />)
+
+  expect(screen.getByText('ชุดตัวอย่างกรณีผ่าน')).toBeTruthy()
+  expect(screen.getByText(PRECHECK_MOCK_FIXTURES.passed.summary)).toBeTruthy()
+  expect(screen.getAllByText(/สถานะ: ผ่าน \(ตัวอย่าง\)/)).toHaveLength(2)
+  expect(screen.getByText(/ข้อมูลที่ใช้เปรียบเทียบ: ปีการศึกษา 2568 \/ 517 121/)).toBeTruthy()
 })

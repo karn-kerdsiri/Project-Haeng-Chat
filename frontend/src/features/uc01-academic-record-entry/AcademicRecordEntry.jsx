@@ -10,7 +10,7 @@
 import { useState } from 'react'
 import {
   ALLOWED_GRADES, SEMESTERS, FILE_RULES,
-  CURRICULUM_COURSES, PREPARATION_COURSE, NOT_PASSED_GRADES,
+  CURRICULUM_COURSES, PREPARATION_COURSE, NOT_PASSED_GRADES, PRECHECK_MOCK_FIXTURES,
 } from './mock.js'
 
 // ส่วนหัวของแบบฟอร์มจริง
@@ -68,6 +68,38 @@ export function validateFiles(files) {
     if (f.sizeMB > FILE_RULES.maxSizeMB) return `ไฟล์ต้องมีขนาดไม่เกิน ${FILE_RULES.maxSizeMB} MB ต่อไฟล์`
   }
   return ''
+}
+
+// FR-PRE-04 / DR-PRE-02 / CON-PRE-01: แสดงผลจำลองเท่านั้น ไม่คำนวณหรือเรียก API
+export function PrecheckMockPanel({ fixture }) {
+  if (!fixture) return null
+
+  return (
+    <aside className="space-y-3 rounded border border-amber-300 bg-amber-50 p-3" aria-label="ผลตรวจเบื้องต้นจำลอง">
+      <h3 className="font-bold">ผลเบื้องต้น — ตัวอย่างจำลอง ไม่ใช่ผลทางการ</h3>
+      <p className="text-sm text-amber-950">{fixture.sampleLabel}</p>
+      <p className="text-sm text-gray-700">
+        ตัวอย่างทั้งสองกรณีไม่เกี่ยวข้องกับยอดรวมผลการเรียนของนักศึกษาที่แสดงในแบบฟอร์ม
+      </p>
+      <p className="text-gray-800">{fixture.summary}</p>
+      <ul className="space-y-2">
+        {fixture.conditions.map((condition) => (
+          <li key={condition.label} className="rounded border bg-white p-2">
+            <div className="flex flex-wrap justify-between gap-2">
+              <span className="font-medium">{condition.label}</span>
+              <span className={condition.status.startsWith('ผ่าน') ? 'text-green-700' : 'text-red-700'}>
+                สถานะ: {condition.status}
+              </span>
+            </div>
+            <p className="text-sm text-gray-700">ข้อมูลที่ใช้เปรียบเทียบ: {condition.comparedData}</p>
+            {condition.reason && (
+              <p className="text-sm text-red-700">เหตุผล: {condition.reason}</p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )
 }
 
 export default function AcademicRecordEntry() {
@@ -223,6 +255,13 @@ export default function AcademicRecordEntry() {
         ระบบคำนวณยอดรวมให้อัตโนมัติ นิยาม &quot;สอบผ่าน&quot; ที่ใช้ชั่วคราวคือมีเกรดแล้วและไม่ใช่ F, W หรือ I
         (รอยืนยันตาม OQ-EDU-01)
       </p>
+
+      {import.meta.env.DEV && (
+        <div className="space-y-3">
+          <PrecheckMockPanel fixture={PRECHECK_MOCK_FIXTURES.passed} />
+          <PrecheckMockPanel fixture={PRECHECK_MOCK_FIXTURES.failed} />
+        </div>
+      )}
 
       {/* ไฟล์แนบตาม DR-EDU-06 และ DR-EDU-07 */}
       <div className="flex flex-col gap-1">

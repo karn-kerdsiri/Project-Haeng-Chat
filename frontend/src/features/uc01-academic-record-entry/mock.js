@@ -65,3 +65,43 @@ export const NOT_PASSED_GRADES = ['F', 'W', 'I']
 
 // DR-ADD-02 ชุดค่าเกรดที่รับได้ (ASM-ADD-05)
 export const ALLOWED_GRADES = ['A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F', 'W', 'I', 'T']
+
+// FR-PRE-04 / DR-PRE-02: ตัวอย่างผลเบื้องต้นสำหรับแสดง UI เท่านั้น ไม่ใช่เงื่อนไขจริงหรือผลคำนวณ
+export const PRECHECK_MOCK_FIXTURES = {
+  passed: {
+    sampleLabel: 'ชุดตัวอย่างกรณีผ่าน',
+    summary: 'ตัวอย่างผลสรุป: รายการข้อมูลสมมติถูกแสดงในสถานะผ่าน',
+    conditions: [
+      {
+        label: 'ข้อมูลตัวอย่างรายวิชา',
+        status: 'ผ่าน (ตัวอย่าง)',
+        comparedData: 'ปีการศึกษา 2568 / 517 121 — Computer Programming Skill I / เกรด A',
+        reason: '',
+      },
+      {
+        label: 'รายการข้อมูลตัวอย่างเพิ่มเติม',
+        status: 'ผ่าน (ตัวอย่าง)',
+        comparedData: 'ปีการศึกษา 2568 / 517 122 — Computer Programming Skill II / เกรด B',
+        reason: '',
+      },
+    ],
+  },
+  failed: {
+    sampleLabel: 'ชุดตัวอย่างกรณีไม่ผ่าน',
+    summary: 'ตัวอย่างผลสรุป: รายการข้อมูลสมมติถูกแสดงในสถานะไม่ผ่าน',
+    conditions: [
+      {
+        label: 'ข้อมูลตัวอย่างรายวิชา',
+        status: 'ไม่ผ่าน (ตัวอย่าง)',
+        comparedData: 'ปีการศึกษา 2568 / 517 122 — Computer Programming Skill II / เกรด D',
+        reason: 'ข้อมูลในชุดนี้ถูกกำหนดเพื่อแสดงกรณีตัวอย่างที่ไม่ผ่านเท่านั้น ไม่ใช่การตัดสินเกรดจริง',
+      },
+      {
+        label: 'รายการข้อมูลตัวอย่างเพิ่มเติม',
+        status: 'ผ่าน (ตัวอย่าง)',
+        comparedData: 'ปีการศึกษา 2568 / 517 121 — Computer Programming Skill I / เกรด B',
+        reason: '',
+      },
+    ],
+  },
+}

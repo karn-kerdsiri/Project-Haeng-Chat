@@ -1391,3 +1391,28 @@
 - แยกการทดสอบ UI เป็น vitest เท่านั้น ไม่สร้าง Backend/pytest tests และไม่สร้าง automated test ในรอบนี้
 - คงสถานะของ TC-PRE-01-1, TC-PRE-03-1 และ TC-PRE-04-1 เป็น "ร่าง"; TC-PRE-01-2 เป็น "รอ Q-01"
 - ไม่แก้ `spec.md`, `plan.md`, `tasks.md` หรือโค้ด และไม่ commit
+
+---
+
+## [2569-11-20 17:39 UTC] คำสั่ง: /implement T-04 specs/007-auto-precheck/tasks.md
+
+- เครื่องมือ: Copilot SDK ใน VS Code (`functions.skill`, `functions.view`, `functions.rg`, `functions.apply_patch`, `functions.bash`)
+- Task: T-04 แสดงผลการตรวจเบื้องต้นใน UC-01
+- ไฟล์ที่แก้:
+  - `frontend/src/features/uc01-academic-record-entry/AcademicRecordEntry.jsx`
+  - `frontend/src/features/uc01-academic-record-entry/AcademicRecordEntry.test.jsx`
+  - `frontend/src/features/uc01-academic-record-entry/mock.js`
+- ผลการ implement:
+  - เพิ่ม fixture ทั้งกรณีผ่านและไม่ผ่านจากข้อมูลสมมติใน `mock.js`
+  - เพิ่มแผงแสดงผลเบื้องต้นในโหมดพัฒนา และแสดงข้อความ “ผลเบื้องต้น — ตัวอย่างจำลอง ไม่ใช่ผลทางการ”
+  - แสดงผลสรุป ผลรายเงื่อนไข สถานะ ข้อมูลที่ใช้เปรียบเทียบ และเหตุผลจาก fixture โดยตรง
+  - ไม่เปลี่ยน Flow, ไม่เพิ่มปุ่ม, ไม่เรียก API และไม่เชื่อม Backend
+- Constraint ที่ทำให้เป็นจริง:
+  - `FR-PRE-04`, `DR-PRE-02`: มีผลสรุป ผลรายเงื่อนไข ข้อมูลเปรียบเทียบ และเหตุผล
+  - `NFR-PRE-03`: ข้อความบนแผงเป็นภาษาไทย
+  - `IF-WEB-01`: แสดงผลด้วย React ในเบราว์เซอร์
+  - `CON-PRE-01`: ระบุชัดว่าเป็นตัวอย่างจำลองและไม่ใช่ผลทางการ
+- สิ่งที่เกือบต้องเดาแต่ไม่เดา:
+  - ไม่กำหนดเงื่อนไขหรือกฎเปรียบเทียบจริงจาก Q-01
+  - ไม่กำหนดสถานะรายวิชาที่ยังไม่สมบูรณ์จาก Q-03
+- ขอบเขต: T-03 และ dependency ยังไม่ถือว่เสร็จ และยังไม่เปลี่ยนสถานะ task หรือแก้ dependency ตามคำสั่งของทีม
