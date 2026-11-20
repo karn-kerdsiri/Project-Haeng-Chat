@@ -1339,3 +1339,27 @@
   - `AC-AVR-06`, `AC-SGN-04`, `AC-MST-08` (จำลองฐานข้อมูลขัดข้องระหว่างธุรกรรม) -> เสนอใช้ Mock Database Session / Dependency Injection เพื่อจำลอง error ระหว่าง transaction และตรวจ rollback
   - `AC-AVR-07`, `NFR-SGN-01`, `NFR-MST-01` (session timeout 30 นาที) -> เสนอใช้ time-freezing / mock clock ใน unit test แทนการรอจริง 30 นาที
   - `NFR-AVR-05` (p95 <= 2 วินาที สำหรับ 50 รายการ) -> เสนอใช้ seed ข้อมูลจำลอง 50 แถวและยิงทดสอบ load ย่อยด้วย pytest/locust ในเครื่อง
+
+---
+
+## [2569-11-20 14:24 UTC] คำสั่ง: /implement T-01 specs/007-auto-precheck/tasks.md
+
+- เครื่องมือ: Copilot SDK ใน VS Code (`functions.skill`, `functions.view`, `functions.glob`, `functions.rg`, `functions.apply_patch`, `functions.bash`)
+- โมเดล: ไม่ปรากฏชื่อในข้อมูล session
+- Task: T-01 สร้าง API client สำหรับหน้าจอ
+- ไฟล์ที่สร้างหรือแก้:
+  - `frontend/src/api/client.js`
+  - `frontend/src/api/client.test.js`
+  - `specs/007-auto-precheck/tasks.md` เปลี่ยนสถานะ T-01 เป็น `เสร็จ รอทีมตรวจ`
+- ผล test:
+  - `test_API_client_posts_to_requested_path`: ผ่าน (1 test)
+  - ชุด test ทั้ง frontend: ผ่าน 42 test จาก 7 ไฟล์
+- สิ่งที่ทีมควรตรวจ:
+  - Response ของ API ที่มี 204 ถูกจัดการเป็น `null`
+  - Error response ถูกส่งต่อพร้อม HTTP status และ response data
+- Constraint ที่ทำให้เป็นจริง:
+  - `IF-WEB-01`: client ใช้ fetch ของเบราว์เซอร์โดยไม่ต้องติดตั้งโปรแกรมเพิ่ม
+  - `IF-TECH-01`: ส่วนติดต่อ browser ใช้งานผ่าน React/Vite และส่งไปยัง path ที่ผู้เรียกกำหนด
+  - `FR-PRE-05`: client รองรับการส่งคำขอ POST สำหรับจุดเรียกตรวจเบื้องต้น
+- สิ่งที่เกือบต้องเดาแต่ไม่ได้เดา:
+  - รูปแบบ backend และ response contract ยังเป็นคำถามตาม plan.md จึงทำเฉพาะ POST JSON ไปยัง path ที่ผู้เรียกกำหนดและคืนผล JSON ที่ส่งกลับโดยไม่เดาโครงสร้างเพิ่มเติม
