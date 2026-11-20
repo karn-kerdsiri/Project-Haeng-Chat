@@ -1,10 +1,11 @@
-// รองรับ FR-PRE-05 และ IF-WEB-01 โดยส่งคำขอ POST ไปยัง path ที่ผู้เรียกกำหนด
-export async function postJson(path, payload) {
-  const response = await fetch(path, {
-    method: 'POST',
+async function requestJson(method, path, payload) {
+  const options = {
+    method,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  })
+  }
+  if (payload !== undefined) options.body = JSON.stringify(payload)
+
+  const response = await fetch(path, options)
 
   if (response.status === 204) return null
 
@@ -25,6 +26,17 @@ export async function postJson(path, payload) {
   return data
 }
 
-export const post = postJson
+// รองรับ FR-PRE-05 และ IF-WEB-01 / FR-GRP-02: ค้นหา Member endpoint ด้วย GET ไปยัง path ที่ผู้เรียกกำหนด
+export async function getJson(path) {
+  return requestJson('GET', path)
+}
 
-export default { postJson, post }
+// รองรับ FR-PRE-05 และ IF-WEB-01 / FR-GRP-02: ส่ง POST ไปยัง Member หรือ Pre-check endpoint ที่ผู้เรียกกำหนด
+export async function postJson(path, payload) {
+  return requestJson('POST', path, payload)
+}
+
+export const post = postJson
+export const get = getJson
+
+export default { getJson, get, postJson, post }

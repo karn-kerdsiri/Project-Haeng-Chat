@@ -1,4 +1,4 @@
-import { postJson } from './client.js'
+import { getJson, postJson } from './client.js'
 
 test('test_API_client_posts_to_requested_path', async () => {
   const fetchMock = vi.fn().mockResolvedValue({
@@ -20,4 +20,53 @@ test('test_API_client_posts_to_requested_path', async () => {
     }),
   )
   expect(result).toEqual({ status: 'received' })
+})
+
+test('test_API_client_calls_member_endpoints', async () => {
+  const fetchMock = vi
+    .fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue({
+        studentId: '650710000',
+        fullName: 'สมชาย ใจดี',
+        department: 'เทคโนโลยีสารสนเทศ',
+      }),
+    })
+    .mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue({ status: 'linked' }),
+    })
+  globalThis.fetch = fetchMock
+
+  const lookup = await getJson('/api/students?studentId=650710000')
+  const linked = await postJson('/api/requests/request-1/members', {
+    studentId: '650710000',
+  })
+
+  expect(fetchMock).toHaveBeenNthCalledWith(
+    1,
+    '/api/students?studentId=650710000',
+    expect.objectContaining({
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }),
+  )
+  expect(fetchMock).toHaveBeenNthCalledWith(
+    2,
+    '/api/requests/request-1/members',
+    expect.objectContaining({
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ studentId: '650710000' }),
+    }),
+  )
+  expect(lookup).toEqual({
+    studentId: '650710000',
+    fullName: 'สมชาย ใจดี',
+    department: 'เทคโนโลยีสารสนเทศ',
+  })
+  expect(linked).toEqual({ status: 'linked' })
 })
