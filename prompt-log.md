@@ -1313,3 +1313,29 @@
 - งานที่ยากที่สุด: T-16/T-17 การบันทึกสถานะอนุมัติ/ส่งกลับและประวัติให้สอดคล้องกัน เพราะชื่อสถานะรอ Q-02 และนโยบายเมื่อฐานข้อมูล/ประวัติขัดข้องรอ Q-05
 - การทดสอบที่ยากในสภาพแวดล้อมนักศึกษา: AC-APR-04 ต้องจำลองฐานข้อมูลไม่พร้อมระหว่างบันทึก; เสนอให้ใช้ฐานข้อมูลทดสอบและจำลอง failure ระหว่างการบันทึกสถานะกับประวัติ เพื่อตรวจว่าสถานะเดิมยังอยู่ โดยรายละเอียด error/status/history ให้ทีมยืนยันตาม Q-05
 - ไม่มีการเริ่มทำ task หรือแก้ไขโค้ดระบบ
+
+
+---
+
+## [2569-11-20 13:25] คำสั่ง: /tasks สำหรับ specs/010, specs/011, specs/012
+
+- เครื่องมือ: Copilot ใน VS Code
+- ไฟล์อ้างอิง:
+  - `specs/010-advisor-view-advisee-result/spec.md` (Draft v2) และ `plan.md`
+  - `specs/011-sign-certify-document/spec.md` (Draft v2) และ `plan.md`
+  - `specs/012-manage-master-data/spec.md` (Draft v2) และ `plan.md`
+  - `specs/common.md` และ `AGENTS.md`
+- ผลลัพธ์:
+  - `specs/010-advisor-view-advisee-result/tasks.md` (8 เฟส 13 task, รอคำตอบ 0 task)
+  - `specs/011-sign-certify-document/tasks.md` (9 เฟส 14 task, รอคำตอบ 0 task)
+  - `specs/012-manage-master-data/tasks.md` (10 เฟส 14 task, รอคำตอบ 0 task)
+- ข้อสรุป:
+  - แบ่ง task แบบ vertical slice ตามลำดับการใช้งาน 1 เฟสต่อ 1 AC ครบทุก AC (`AC-AVR-01..07`, `AC-SGN-01..08`, `AC-MST-01..09`) และตรวจความครบถ้วนของ Constraint และ FR ทั้งหมดแล้ว
+  - ไม่มีการแก้ไข `spec.md`, `plan.md` หรือสร้างโค้ด/ID ใหม่เกินขอบเขต
+- งานที่ยากที่สุด:
+  - `SPEC-SGN-011` (`T-05`, `T-13`): การคำนวณและตรวจสอบ SHA-256 Checksum ร่วมกับการตั้งค่า Immutability ที่ระดับฐานข้อมูลไม่ให้แก้หรือลบย้อนหลังในธุรกรรมเดียวกับการอัปเดตสถานะและ AuditLog
+  - `SPEC-MST-012` (`T-10`): การตรวจสอบ Referential Integrity ก่อน Soft Delete ข้ามหลาย entity (`Course`, `Instructor`, `InstructorQuota`, `PassingCriteria`) ที่ถูกอ้างอิงในคำร้อง
+- AC ที่ทดสอบยากในสภาพแวดล้อมนักศึกษา:
+  - `AC-AVR-06`, `AC-SGN-04`, `AC-MST-08` (จำลองฐานข้อมูลขัดข้องระหว่างธุรกรรม) -> เสนอใช้ Mock Database Session / Dependency Injection เพื่อจำลอง error ระหว่าง transaction และตรวจ rollback
+  - `AC-AVR-07`, `NFR-SGN-01`, `NFR-MST-01` (session timeout 30 นาที) -> เสนอใช้ time-freezing / mock clock ใน unit test แทนการรอจริง 30 นาที
+  - `NFR-AVR-05` (p95 <= 2 วินาที สำหรับ 50 รายการ) -> เสนอใช้ seed ข้อมูลจำลอง 50 แถวและยิงทดสอบ load ย่อยด้วย pytest/locust ในเครื่อง
