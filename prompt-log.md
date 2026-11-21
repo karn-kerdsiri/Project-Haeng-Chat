@@ -1491,3 +1491,26 @@
 - ผลลัพธ์: สร้าง `specs/006-select-advisor-group/test-cases.md` และเพิ่ม 3 แถวร่าง: TC-ADV-03-1, TC-ADV-03-2, TC-ADV-03-3
 - ส่วนที่ spec ไม่ได้บอก: เมื่อพยายามเลือก 2 กลุ่มในคำขอเดียว จะปฏิเสธทั้งหมดหรือยอมรับกลุ่มใดกลุ่มหนึ่ง (DR-ADV-04); ไม่มี Open Question เดิมที่ระบุพฤติกรรมนี้โดยตรง
 - ผล test: ไม่ได้เขียนหรือรัน test ตามคำสั่งให้หยุดที่โหมดร่าง
+## [2569-11-21] คำสั่ง: /testcases AC-GRP-06 specs/008-enter-group-members/
+
+- โหมด: ร่าง (ยังไม่มีแถว AC-GRP-06 ใน test-cases.md)
+- อ้างอิง: spec.md, plan.md ข้อ 6, tasks.md, AGENTS.md
+- สถานะ Task: T-03 และ T-04 พร้อมทำ
+- TC ID ที่เสนอ: TC-GRP-06-1, TC-GRP-06-2, TC-GRP-06-3
+- ผล test: ไม่ได้รัน (รอบร่าง ยังไม่เขียน Automated Test)
+- ผลลัพธ์: สร้างตารางร่างใน `specs/008-enter-group-members/test-cases.md`
+- หมายเหตุ: ไม่พบ mockup HTML; กรณีขอบยึดขอบเขตฟิลด์ที่อนุญาตตาม FR-GRP-10 เนื่องจาก Given และ FR-GRP-10 ไม่ระบุตัวเลข
+- ห้ามแก้โค้ดระบบหรือเขียน Automated Test ก่อนทีมตรวจและเปลี่ยนสถานะเป็น "ใช้ได้"
+
+---
+
+## [2569-11-21] คำสั่ง: /implement T-01 specs/009-advisor-approve-record/tasks.md
+
+- เครื่องมือ: Copilot SDK ใน VS Code
+- ไฟล์อ้างอิง: `specs/009-advisor-approve-record/tasks.md`, `specs/009-advisor-approve-record/spec.md`, `specs/009-advisor-approve-record/plan.md`, `AGENTS.md`
+- ไฟล์ที่แก้: `frontend/src/api/client.test.js`, `specs/009-advisor-approve-record/tasks.md`
+- ไฟล์ที่สร้าง: ไม่มี
+- การใช้ client: ใช้ `getJson`/`postJson` ที่มีอยู่แล้ว ซึ่งรองรับ path ที่ผู้เรียกกำหนด; ไม่เปลี่ยน implementation ใน `client.js`
+- ผล test: `cd frontend && npm test -- src/api/client.test.js` — 1 file passed, 3 tests passed
+- สิ่งที่เกือบต้องเดาแต่ถามแทน: ไม่มี; test ตรวจเฉพาะการส่ง request/response และ serialization ด้วย fetch จำลอง ไม่กำหนด schema รายละเอียดเกิน plan
+- สถานะ T-01: เสร็จ รอทีมตรวจ

@@ -70,3 +70,61 @@ test('test_API_client_calls_member_endpoints', async () => {
   })
   expect(linked).toEqual({ status: 'linked' })
 })
+
+test('test_API_client_calls_advisor_review_endpoints', async () => {
+  const fetchMock = vi
+    .fn()
+    .mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue({ reviews: [] }),
+    })
+    .mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue({ review: 'mock' }),
+    })
+    .mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      json: vi.fn().mockResolvedValue({ result: 'received' }),
+    })
+  globalThis.fetch = fetchMock
+
+  const decisionPayload = { sample: 'mock' }
+  const reviews = await getJson('/api/advisor/reviews')
+  const review = await getJson('/api/advisor/reviews/request-1')
+  const decision = await postJson(
+    '/api/advisor/reviews/request-1/decision',
+    decisionPayload,
+  )
+
+  expect(fetchMock).toHaveBeenNthCalledWith(
+    1,
+    '/api/advisor/reviews',
+    expect.objectContaining({
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }),
+  )
+  expect(fetchMock).toHaveBeenNthCalledWith(
+    2,
+    '/api/advisor/reviews/request-1',
+    expect.objectContaining({
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }),
+  )
+  expect(fetchMock).toHaveBeenNthCalledWith(
+    3,
+    '/api/advisor/reviews/request-1/decision',
+    expect.objectContaining({
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(decisionPayload),
+    }),
+  )
+  expect(reviews).toEqual({ reviews: [] })
+  expect(review).toEqual({ review: 'mock' })
+  expect(decision).toEqual({ result: 'received' })
+})
