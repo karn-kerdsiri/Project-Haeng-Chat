@@ -1514,3 +1514,15 @@
 - ผล test: `cd frontend && npm test -- src/api/client.test.js` — 1 file passed, 3 tests passed
 - สิ่งที่เกือบต้องเดาแต่ถามแทน: ไม่มี; test ตรวจเฉพาะการส่ง request/response และ serialization ด้วย fetch จำลอง ไม่กำหนด schema รายละเอียดเกิน plan
 - สถานะ T-01: เสร็จ รอทีมตรวจ
+
+---
+
+## [2569-11-21] คำสั่ง: /testcases AC-APR-01 specs/009-advisor-approve-record/
+
+- โหมด: ร่าง (ยังไม่มีแถว AC-APR-01 ใน test-cases.md)
+- อ้างอิง: specs/009-advisor-approve-record/spec.md, plan.md ข้อ 6, tasks.md, AGENTS.md
+- สถานะ Task ที่เกี่ยวข้อง: T-05 พร้อมทำ; T-14 และ T-15 รอ Q-01; T-16 รอ Q-02
+- TC ID ที่เสนอ: TC-APR-01-1, TC-APR-01-2, TC-APR-01-3
+- ผล test: ไม่ได้รัน (รอบร่าง ยังไม่เขียน Automated Test)
+- ผลลัพธ์: สร้าง specs/009-advisor-approve-record/test-cases.md
+- ข้อจำกัด: ไม่กำหนดรายละเอียดตาม Q-01 หรือชื่อสถานะตาม Q-02; พบตารางตามรอยใน tasks.md ระบุ T-06 เป็น AC-APR-01 แต่รายละเอียด T-06 ระบุ AC-APR-02 จึงไม่แก้ Task และบันทึกไว้ให้ทีมตรวจ
